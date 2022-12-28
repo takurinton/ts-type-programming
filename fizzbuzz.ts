@@ -1,24 +1,4 @@
-type ToTuple<N extends number, R extends any[] = []> = R["length"] extends N
-  ? R
-  : ToTuple<N, [undefined, ...R]>;
-
-type Add<T extends number, U extends number> = [
-  ...ToTuple<T>,
-  ...ToTuple<U>
-]["length"] extends number
-  ? [...ToTuple<T>, ...ToTuple<U>]["length"]
-  : never;
-
-type Sub<T extends number, U extends number> = ToTuple<T> extends [
-  ...ToTuple<U>,
-  ...infer S
-]
-  ? S["length"]
-  : never;
-
-type Mod<T extends number, U extends number> = Sub<T, U> extends undefined
-  ? T
-  : Mod<Sub<T, U>, U>;
+import type { Add, Mod } from "./utils";
 
 type IsDivisible3<T extends number> = Mod<T, 3> extends 0 ? true : false;
 type IsDivisible5<T extends number> = Mod<T, 5> extends 0 ? true : false;
