@@ -23,3 +23,9 @@ export type Mod<T extends number, U extends number> = Sub<
 > extends undefined
   ? T
   : Mod<Sub<T, U>, U>;
+
+expect<Add<1, 2>>().toEqual<3>();
+expect<Sub<1, 2>>().toEqual<never>();
+expect<Sub<2, 1>>().toEqual<1>();
+expect<Mod<1, 1>>().toEqual<0>();
+expect<Mod<3, 2>>().toEqual<1>();

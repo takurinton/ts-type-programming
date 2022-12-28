@@ -19,16 +19,34 @@ type FizzBuzz<N extends number, R extends any[] = []> = R["length"] extends N
   ? R
   : FizzBuzz<N, [...R, JudgeFizzBuzz<Add<R["length"], 1>>]>;
 
-// 1
-let num1: JudgeFizzBuzz<1>;
-// 2
-let num2: JudgeFizzBuzz<2>;
-// "fizz"
-let fizz: JudgeFizzBuzz<3>;
-// "buzz"
-let buzz: JudgeFizzBuzz<5>;
-// "fizzbuzz"
-let fizzbuzz: JudgeFizzBuzz<15>;
+expect<IsDivisible3<1>>().toEqual<false>();
+expect<IsDivisible3<3>>().toEqual<true>();
+expect<IsDivisible5<1>>().toEqual<false>();
+expect<IsDivisible5<5>>().toEqual<true>();
+expect<IsDivisible15<1>>().toEqual<false>();
+expect<IsDivisible15<15>>().toEqual<true>();
 
-// [1, 2, "fizz", 4, "buzz", "fizz", 7, 8, "fizz", "buzz", 11, "fizz", 13, 14, "fizzbuzz"]
-let fizzbuzzList: FizzBuzz<15>;
+expect<JudgeFizzBuzz<1>>().toEqual<1>();
+expect<JudgeFizzBuzz<3>>().toEqual<"fizz">();
+expect<JudgeFizzBuzz<5>>().toEqual<"buzz">();
+expect<JudgeFizzBuzz<15>>().toEqual<"fizzbuzz">();
+
+expect<FizzBuzz<15>>().toEqual<
+  [
+    1,
+    2,
+    "fizz",
+    4,
+    "buzz",
+    "fizz",
+    7,
+    8,
+    "fizz",
+    "buzz",
+    11,
+    "fizz",
+    13,
+    14,
+    "fizzbuzz"
+  ]
+>();
